@@ -23,12 +23,12 @@ pipeline {
                }
             }
         }
-        stage('Kubernetes Deployment') {
+        stage('Kubectl Deployment') {
             steps {
                sh 'kubectl create deployment rondep --port 5000 -r 2 -n ronns --image rondocker8511/rondockerrep:testjenkinsdocker'
             }
         }
-        stage('Kubernetes Expose') {
+        stage('Kubectl Expose') {
             steps {
                sh 'kubectl expose deployment rondep -n ronns --type=ClusterIP --port=5000'
             }
