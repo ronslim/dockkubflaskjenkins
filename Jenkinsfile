@@ -7,12 +7,12 @@ pipeline {
                 echo "Git Checkout Completed"
             }
         }
-        stage('DockerBuild') {
+        stage('Docker Build') {
             steps {
                sh 'docker build -f Dockerfile -t rondocker8511/rondockerrep:testjenkinsdocker .'
             }
         }
-        stage('DockerPush') {
+        stage('Docker Push') {
             steps {
                script {
                // This step should not normally be used in your script. Consult the inline help for details.
@@ -23,12 +23,12 @@ pipeline {
                }
             }
         }
-        stage('KubernetesDeployment') {
+        stage('Kubernetes Deployment') {
             steps {
                sh 'kubectl create deployment rondep --port 5000 -r 2 -n ronns --image rondocker8511/rondockerrep:testjenkinsdocker'
             }
         }
-        stage('KubernetesExpose') {
+        stage('Kubernetes Expose') {
             steps {
                sh 'kubectl expose deployment rondep -n ronns --type=ClusterIP --port=5000'
             }
