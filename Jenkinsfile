@@ -1,12 +1,6 @@
 pipeline {
     agent any
     stages {
-        stage('Git Checkout') {
-            steps {
-                git branch: 'main', credentialsId: '6dfa8ed5-4328-4c3a-9b56-ba73d9ee9ea5', url: 'https://github.com/ronslim/dockkubflaskjenkins'
-                echo "Git Checkout Completed"
-            }
-        }
         stage('Docker Build') {
             steps {
                sh 'docker build -f Dockerfile -t rondocker8511/rondockerrep:testjenkinsdocker .'
